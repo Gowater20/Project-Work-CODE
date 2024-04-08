@@ -1,10 +1,10 @@
 # Project-Work-CODE
 Fabio --> auth
-    registrazione
-    login
-    bcrypt password
-    autenticazione jwt
-    admin
+    [V]registrazione 
+    [V]login
+    [V]bcrypt password
+    []autenticazione jwt
+    []admin
 
 
 

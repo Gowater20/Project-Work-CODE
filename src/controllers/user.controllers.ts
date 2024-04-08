@@ -9,7 +9,7 @@ export const Signup = async (req: Request, res: Response) => {
         return res.status(200).json({ userCreated });
     } catch (err: any) {
         console.log(err);
-        return res.status(400).json({ error: err.message });
+        return res.status(500).json({ error: err.message });
     }
 };
 
