@@ -1,5 +1,12 @@
 # Project-Work-CODE
-/* crea routes e metodi insieme;
-mok-- > definizione data model; */
+Fabio --> auth
+    registrazione
+    login
+    bcrypt password
+    autenticazione jwt
+    admin
 
-/* live share --> per programmare contemporaneamente; */
+
+
+Dylan --> cart/order
+Valeria --> products
