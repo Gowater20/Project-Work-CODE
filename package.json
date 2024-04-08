@@ -2,10 +2,10 @@
   "name": "project-work-code",
   "version": "1.0.0",
   "description": "Final Project CODE course  ",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"tsc --watch\" \"nodemon ./dist/dbconnection.js\""
+    "start": "concurrently \"tsc --watch\" \"nodemon ./dist/index.js\""
   },
   "repository": {
     "type": "git",
