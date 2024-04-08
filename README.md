@@ -4,6 +4,7 @@ Fabio --> auth
     [V]login
     [V]bcrypt password
     []autenticazione jwt
+    []white list admin
     []admin
 
 

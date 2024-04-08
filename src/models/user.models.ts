@@ -24,10 +24,15 @@ const userSchema = new mongoose.Schema<IUser>(
             ref: "Cart",
             required: false,
         },
-        date: {
+        birthdate: {
             type: String,
             required: false,
         },
+        role: {
+            type: String,
+            required: false,
+            default: "user"
+        }
     },
 
     { timestamps: true }
