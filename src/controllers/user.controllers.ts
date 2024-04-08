@@ -20,7 +20,8 @@ export const Login = async (req: Request, res: Response) => {
         if (!user) {
             return res.status(400).json({ message: "Wrong email or password" });
         }
-        return res.status(200).json({ user});
+
+        return res.status(200).json({ user });
     } catch (err: any) {
         return res.status(500).json({ error: err.message });
     }
