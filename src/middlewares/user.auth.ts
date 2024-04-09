@@ -1,39 +1,29 @@
-/* import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
+import { Request, Response, NextFunction } from 'express';
+import { MongoCursorInUseError } from 'mongodb';
 import { User } from '../models/user.models';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
-const JWTMiddleware = async (req: Request, res: Response, next: NextFunction) => {
-    let token;
-    if (req?.headers?.authorization?.startsWith("Bearer")) {
-        token = req.headers.authorization.split(" ")[1];
-        try {
-            if (token) {
-                const decoded: any = jwt.verify(token, process.env.JWT_SECRET || '');
-                const user = await User.findById(decoded?.id);
-                if (user) {
-                    req.user = user;
-                    next();
-                } else {
-                    throw new Error("User not found");
-                }
-            }/
-        } catch (error) {
-            throw new Error("Not Authorized token expired. Please Login again");
+const JWT_SECRET = process.env.JWT_SECRET;
+
+// TODO jwt
+
+/* export const VerifyToken = (req: Request, res: Response, next: NextFunction) => {
+    const token = req.headers.authorization?.split(' ')[1];
+    console.log('token', token);
+
+    if (!token) {
+        return res.status(401).json({ message: 'Token not provided' });
+    }
+
+    try {
+        if (!JWT_SECRET) {
+            throw new Error('JWT secret is not defined');
         }
-    } else {
-        throw new Error("There is no token attached to header");
-    }
-};
 
-const isAdmin = async (req: Request, res: Response, next: NextFunction) => {
-    const { email } = req.user as { email: string };
-    const adminUser = await User.findOne({ email });
-    if (adminUser?.role !== "admin") {
-        throw new Error("You are not an admin");
-    } else {
+        const decodedToken: any = jwt.verify(token, JWT_SECRET);
         next();
+    } catch (err) {
+        return res.status(401).json({ message: 'Invalid token' });
     }
-};
-
-export { JWTMiddleware, isAdmin };
- */
+}; */
