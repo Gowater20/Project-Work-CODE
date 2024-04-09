@@ -1,0 +1,54 @@
+
+GET http://localhost:3000/
+
+###
+// show all product (no admin)
+GET http://localhost:3000/api/products/
+
+###
+// add new product (user)
+POST http://localhost:3000/api/products/
+Content-Type: application/json
+
+{
+    "id": "987",
+    "name": "fantastic product",
+    "brand": "Dream Brands Inc.",
+    "quantity": 40,
+    "price": 49.99,
+    "sale": 0.2
+}
+
+###
+// get product by id
+GET http://localhost:3000/api/products/661505b33fdb4d3ae1fc7995
+Content-Type: application/json
+
+{
+    "id": "123456789",
+    "name": "Fantasy Product",
+    "brand": "Dream Brands Inc.",
+    "quantity": 50,
+    "price": 99.99,
+    "sale": 0.2
+}
+
+
+// delete producut by id
+###
+DELETE  http://localhost:3000/api/products/6615070b3fdb4d3ae1fc7998
+
+
+// aggiorna product by id
+###
+PUT http://localhost:3000/api/products/661505b33fdb4d3ae1fc7995
+Content-Type: application/json
+Authorization: Bearer <Il-tuo-token-JWT>
+{
+    "id": "321",
+    "name": "Fantasy Product2",
+    "brand": "Dream Brands Inc.",
+    "quantity": 50,
+    "price": 99.99,
+    "sale": 0.2
+}

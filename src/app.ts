@@ -14,5 +14,5 @@ app.get("/", (req, res) => {
 
 //rotta per autenticazione
 app.use("/api/auth/", authApi);
-app.use("/api/product/", productApi);
+app.use("/api/products/", productApi);
 

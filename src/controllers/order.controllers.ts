@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+/* import { Request, Response } from 'express';
 import Order, { IOrder } from '../models/order.model'; // Assicurati che il percorso al modello dell'ordine sia corretto
 import { IProduct } from '../types/product.type'; // Assicurati che il percorso al tipo del prodotto sia corretto
 
@@ -61,3 +61,4 @@ export const removeOrder = async (
 		res.status(500).json({ error: 'Internal server error' });
 	}
 };
+ */
