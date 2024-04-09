@@ -7,5 +7,6 @@ export interface IUser {
     password: string;
     card?: Schema.Types.ObjectId;
     cart?: Schema.Types.ObjectId;
-    date: string;
+    birthdate: string;
+    role: string;
 }

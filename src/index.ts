@@ -1,10 +1,11 @@
 import mongoose from 'mongoose';
 import { app } from './app';
+import dotenv from 'dotenv'
+dotenv.config()
 
 
-const CONNECTION_URL: string = 'mongodb://localhost:27017/ProjectWorkCode';
-const PORT = 3000;
-
+const CONNECTION_URL='mongodb://localhost:27017/ProjectWorkCode';
+const PORT = process.env.PORT || 4000;
 const DB = async () => {
     try {
         await mongoose.connect(CONNECTION_URL);

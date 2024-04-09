@@ -9,7 +9,7 @@ export const Signup = async (req: Request, res: Response) => {
         return res.status(200).json({ userCreated });
     } catch (err: any) {
         console.log(err);
-        return res.status(400).json({ error: err.message });
+        return res.status(500).json({ error: err.message });
     }
 };
 
@@ -20,8 +20,18 @@ export const Login = async (req: Request, res: Response) => {
         if (!user) {
             return res.status(400).json({ message: "Wrong email or password" });
         }
-        return res.status(200).json({ user});
+        // TODO inserisci token
+        //const token = createSecretToken(userByEmail.id!, 30);
+        //return res.status(200).json({ user: userByEmail, token });
+
+        return res.status(200).json({ user });
     } catch (err: any) {
         return res.status(500).json({ error: err.message });
     }
 };
+
+// TODO getUserLogged
+/* 
+export const getUserLogged = async (req: Request, res: Response) => {
+    
+} */
