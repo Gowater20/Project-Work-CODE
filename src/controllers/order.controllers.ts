@@ -74,4 +74,3 @@ export const removeAllOrders = async (req: Request, res: Response) => {
 		});
 	}
 };
- */
