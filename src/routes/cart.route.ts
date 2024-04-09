@@ -1,7 +1,17 @@
 import { Router } from 'express';
+
+import {
+	addProductToCartController,
+	getCartController,
+	getProduct,
+	removeCartController,
+	removeProductFromCartController,
+} from '../controllers/cart.controllers';
+
 export const router = Router();
 
-router.get('/cart', getCart);
-router.post('/cart/:id', addProduct);
-router.delete('/cart/:id', removeProduct);
-router.delete('/cart', removeCart);
+router.get('/cart', getCartController);
+router.get('/cart/:id', getProduct);
+router.post('/cart/:id', addProductToCartController);
+router.delete('/cart/:id', removeProductFromCartController);
+router.delete('/cart', removeCartController);

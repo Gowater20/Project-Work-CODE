@@ -1,63 +1,76 @@
 import { Request, Response } from 'express';
-import Order, { IOrder } from '../models/order.model'; // Assicurati che il percorso al modello dell'ordine sia corretto
-import { IProduct } from '../types/product.type'; // Assicurati che il percorso al tipo del prodotto sia corretto
+import {
+	showOrder,
+	showOrderById,
+	addProductToCart,
+	removeProductFromCart,
+	removeOrder,
+} from '../services/order.service';
 
-export const showOrder = async (req: Request, res: Response): Promise<void> => {
+export const getOrders = async (req: Request, res: Response) => {
 	try {
-		const orders: IOrder[] = await Order.find();
-		res.status(200).json(orders);
+		const orders = await showOrder();
+		res.status(200).json({ success: true, data: orders });
 	} catch (error) {
-		res.status(500).json({ error: 'Internal server error' });
+		res.status(500).json({
+			success: false,
+			error: 'Error while getting orders',
+		});
 	}
 };
 
-export const addProductToOrder = async (
-	req: Request,
-	res: Response
-): Promise<void> => {
+export const getOrderById = async (req: Request, res: Response) => {
+	const orderId = req.params.id;
 	try {
-		const { id } = req.params;
-		const order: IOrder | null = await Order.findById(id);
-		if (!order) return res.status(404).json({ error: 'Order not found' });
-
-		const { name, price }: IProduct = req.body;
-		order.products.push({ name, price });
-		await order.save();
-		res.status(200).json(order);
+		const order = await showOrderById(orderId);
+		if (!order) {
+			return res
+				.status(404)
+				.json({ success: false, error: 'Order not found' });
+		}
+		res.status(200).json({ success: true, data: order });
 	} catch (error) {
-		res.status(500).json({ error: 'Internal server error' });
+		res.status(500).json({
+			success: false,
+			error: 'Error while getting order by id',
+		});
 	}
 };
 
-export const removeProductFromOrder = async (
-	req: Request,
-	res: Response
-): Promise<void> => {
+export const createOrder = async (req: Request, res: Response) => {
+	const orderData = req.body;
 	try {
-		const { id } = req.params;
-		const order: IOrder | null = await Order.findById(id);
-		if (!order) return res.status(404).json({ error: 'Order not found' });
-
-		const { name }: { name: string } = req.body;
-		order.products = order.products.filter(
-			(product) => product.name !== name
-		);
-		await order.save();
-		res.status(200).json(order);
+		const order = await addProductToCart(orderData);
+		res.status(201).json({ success: true, data: order });
 	} catch (error) {
-		res.status(500).json({ error: 'Internal server error' });
+		res.status(500).json({
+			success: false,
+			error: 'Error while creating order',
+		});
 	}
 };
 
-export const removeOrder = async (
-	req: Request,
-	res: Response
-): Promise<void> => {
+export const removeOrderById = async (req: Request, res: Response) => {
+	const orderId = req.params.id;
 	try {
-		const { id } = req.params;
-		await Order.findByIdAndDelete(id);
-		res.status(200).json({ message: 'Order deleted successfully' });
+		await removeProductFromCart(orderId);
+		res.status(200).json({ success: true });
 	} catch (error) {
-		res.status(500).json({ error: 'Internal server error' });
+		res.status(500).json({
+			success: false,
+			error: 'Error while deleting order',
+		});
+	}
+};
+
+export const removeAllOrders = async (req: Request, res: Response) => {
+	try {
+		await removeOrder();
+		res.status(200).json({ success: true });
+	} catch (error) {
+		res.status(500).json({
+			success: false,
+			error: 'Error while deleting all orders',
+		});
 	}
 };
