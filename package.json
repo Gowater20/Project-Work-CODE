@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Gowater20/PROGETTO-CODE#readme",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "concurrently": "^8.2.2",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
