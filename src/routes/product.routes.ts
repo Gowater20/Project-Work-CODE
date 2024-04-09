@@ -9,3 +9,4 @@ router.get("/:id", getProductById); // get product by id
 router.post("/", addProduct); // add product
 router.put("/:id", updateProduct); // update product
 router.delete("/:id", deletedProduct); // delete product
+

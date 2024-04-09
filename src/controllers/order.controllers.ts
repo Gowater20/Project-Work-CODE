@@ -2,9 +2,9 @@ import { Request, Response } from 'express';
 import {
 	showOrder,
 	showOrderById,
-	addProductToCart,
 	removeProductFromCart,
 	removeOrder,
+	newOrder,
 } from '../services/order.service';
 
 export const getOrders = async (req: Request, res: Response) => {
@@ -40,7 +40,7 @@ export const getOrderById = async (req: Request, res: Response) => {
 export const createOrder = async (req: Request, res: Response) => {
 	const orderData = req.body;
 	try {
-		const order = await addProductToCart(orderData);
+		const order = await newOrder(orderData);
 		res.status(201).json({ success: true, data: order });
 	} catch (error) {
 		res.status(500).json({

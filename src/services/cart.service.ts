@@ -1,70 +1,64 @@
 import Cart from '../models/cart.models';
 import { Icart } from '../types/cart.type';
+import { Product } from '../models/product.models';
 
-export const getCart = async (): Promise<Icart | null> => {
-	try {
-		const cart = await Cart.findOne();
-		return cart;
-	} catch (error) {
-		throw new Error('Error while fetching cart');
-	}
+export const getCart = async (userId: string): Promise<Icart | null> => {
+    try {
+        const cart = await Cart.findOne({user: userId});
+        return cart;
+    } catch (error) {
+        console.error('Errore durante il recupero del carrello:', error);
+        throw new Error('Errore durante il recupero del carrello');
+    }
 };
 
 export const addProductToCart = async (
-	cartId: string,
-	productData: any
+    userId: string,
+    productId: string
 ): Promise<Icart | null> => {
-	try {
-		const cart = await Cart.findById(cartId);
-		if (!cart) {
-			throw new Error('Cart not found');
-		}
-		cart.Products.push(productData);
-		await cart.save();
-		return cart;
-	} catch (error) {
-		throw new Error('Error while adding product to cart');
-	}
+    let cart = await Cart.findOne({user: userId});
+    if (!cart) {
+        // create a cart for the user
+        cart = await Cart.create({
+            user: userId,
+            Products: [],
+        })
+    }
+    const product = await Product.findById(productId);
+    if (!product) {
+        throw new Error("Product not found");
+    }
+
+    cart.Products.push(product);
+    await cart.save();
+
+    return cart;
 };
 
-export const removeProductFromCart = async (
-	cartId: string,
-	productName: string
-): Promise<Icart | null> => {
-	try {
-		const cart = await Cart.findById(cartId);
-		if (!cart) {
-			throw new Error('Cart not found');
+/* 
+	export const removeProductFromCart = async (
+		productId: string
+	): Promise<Icart | null> => {
+		try {
+			const product = await Product.findById(productId);
+			if (!product) {
+				throw new Error("Product not found");
+			}
+	
+			const cart = await Cart.findOneAndDelete(product);
+	
+			return cart;
+		} catch(error) {
+			throw new Error('Error while adding product to cart');
 		}
-		cart.Products = cart.Products.filter(
-			(product) => product.name !== productName
-		);
-		await cart.save();
-		return cart;
-	} catch (error) {
-		throw new Error('Error while removing product from cart');
-	}
-};
+	}; */
 
-export const removeCart = async (): Promise<void> => {
-	try {
-		await Cart.deleteMany();
-	} catch (error) {
-		throw new Error('Error while removing cart');
-	}
-};
 
-export const getProductFromCart = async (productId: string): Promise<any> => {
-	try {
-		const cart = await Cart.findOne({ 'products.id': productId });
-		if (!cart) {
-			return null;
+	//clean cart
+	export const removeCart = async (): Promise<void> => {
+		try {
+			await Cart.deleteMany();
+		} catch (error) {
+			throw new Error('Error while removing cart');
 		}
-		const product = cart.products.find(
-			(product) => product.id === productId
-		);
-		return product;
-	} catch (error) {
-		throw new Error('Error while fetching product from cart');
-	}
-};
+	};

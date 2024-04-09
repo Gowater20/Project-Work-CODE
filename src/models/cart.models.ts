@@ -3,8 +3,16 @@ import { Icart } from '../types/cart.type';
 
 const cartSchema = new mongoose.Schema<Icart>(
 	{
-		id: { type: String, required: true },
-		Products: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Iproduct' }],
+		user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            required: true,
+		},
+		Products: [{ 
+			type: mongoose.Schema.Types.ObjectId, 
+			ref: 'Product', 
+			required: true,
+		}],
 	},
 	{ timestamps: true }
 );

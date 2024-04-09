@@ -1,5 +1,7 @@
+import { Schema } from "mongoose";
+
 export interface Icart {
-	id: string;
+	user: Schema.Types.ObjectId;
 	Products: {
 		filter(arg0: (product: any) => boolean): {
 			push: any;

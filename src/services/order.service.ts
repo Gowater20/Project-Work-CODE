@@ -21,7 +21,7 @@ export const showOrderById = async (
 	}
 };
 
-export const addProductToCart = async (orderData: any): Promise<Iorder> => {
+export const newOrder = async (orderData: any): Promise<Iorder> => {
 	try {
 		const order = await Order.create(orderData);
 		return order;

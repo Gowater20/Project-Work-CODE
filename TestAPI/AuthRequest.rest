@@ -7,9 +7,9 @@ POST http://localhost:3000/api/auth/register
 Content-Type: application/json
 
 {
-    "name": "provaUser",
+    "name": "provaUser3",
     "surname": "cognomeUser",
-    "email": "provaUser@gmail.com",
+    "email": "provaUser3@gmail.com",
     "password": "test123"
 }
 
@@ -18,6 +18,6 @@ POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-    "email": "provaUser@gmail.com",
+    "email": "provaUser3@gmail.com",
     "password": "test123"
 }

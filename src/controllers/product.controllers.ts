@@ -1,4 +1,4 @@
-import { createProduct, deleteProduct, showAllProducts, showProduct, upGrateProduct } from "../services/product.services";
+import { createProduct, deleteProduct, showAllProducts, showProduct, upGrateProduct, } from "../services/product.services";
 import { IProduct } from "../types/product.type";
 import { Request, Response } from "express";
 
@@ -29,7 +29,7 @@ export const addProduct = async (req: Request, res: Response) => {
 	try {
 		const newProduct: IProduct = await createProduct(req.body);
 		res.status(200).json({
-			message: "User added successfully",
+			message: "product added successfully",
 			newProduct,
 		});
 	} catch (error) {
@@ -38,12 +38,17 @@ export const addProduct = async (req: Request, res: Response) => {
 };
 
 export const updateProduct = async (req: Request, res: Response) => {
-	try {
-		const products = await upGrateProduct(req.params.id);
-		res.status(200).json({message: "product modify", products});
-	} catch (error) {
-		res.status(500).json("message:errore");
-	}
+    try {
+		let updatedProduct: IProduct = req.body;
+		const product = await upGrateProduct(req.params.id, updatedProduct);
+        if (!product) {
+            return res.status(404).json({ message: "Prodotto non trovato" });
+        }
+        res.status(200).json({ message: "Prodotto modificato", product });
+    } catch (error) {
+        console.error('Errore durante la gestione della richiesta di aggiornamento del prodotto:', error);
+        res.status(500).json({ message: "Errore interno del server" });
+    }
 };
 
 export const deletedProduct = async (req: Request, res: Response) => {

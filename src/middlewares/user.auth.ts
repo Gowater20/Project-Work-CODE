@@ -4,7 +4,7 @@ import { User } from '../models/user.models';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
-const JWT_SECRET = process.env.JWT_SECRET;
+//const JWT_SECRET = process.env.JWT_SECRET;
 
 // TODO jwt
 

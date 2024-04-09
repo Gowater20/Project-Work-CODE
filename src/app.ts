@@ -1,6 +1,7 @@
 import express from "express";
 import { router as authApi } from "./routes/user.routes";
 import { router as productApi } from "./routes/product.routes";
+import { router as cartApi } from "./routes/cart.routes";
 
 
 export const app = express()
@@ -15,4 +16,5 @@ app.get("/", (req, res) => {
 //rotta per autenticazione
 app.use("/api/auth/", authApi);
 app.use("/api/products/", productApi);
+app.use("/api/cart/", cartApi);
 
