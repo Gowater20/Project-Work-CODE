@@ -1,17 +1,47 @@
-import { Model, Document, Types } from 'mongoose';
 import Order from '../models/order.model';
 import { Iorder } from '../types/order.type';
-import getAll from '../utils/order.utils';
 
-export const showOrder = (orderId: string) => {
-	return getAll(Order);
+export const showOrder = async (): Promise<Iorder[]> => {
+	try {
+		const orders = await Order.find();
+		return orders;
+	} catch (error) {
+		throw new Error('Error while fetching orders');
+	}
 };
-export const createOrder = (order: Iorder) => {
-	return Order.create(order);
+
+export const showOrderById = async (
+	orderId: string
+): Promise<Iorder | null> => {
+	try {
+		const order = await Order.findById(orderId);
+		return order;
+	} catch (error) {
+		throw new Error('Error while fetching order by id');
+	}
 };
-export const updateOrder = (orderId: string, orderUpdate: Partial<Iorder>) => {
-	return Order.findByIdAndUpdate(orderId, orderUpdate);
+
+export const addProductToCart = async (orderData: any): Promise<Iorder> => {
+	try {
+		const order = await Order.create(orderData);
+		return order;
+	} catch (error) {
+		throw new Error('Error while adding product to order');
+	}
 };
-export const deleteOrder = (orderId: string) => {
-	return Order.findByIdAndDelete(orderId);
+
+export const removeProductFromCart = async (orderId: string): Promise<void> => {
+	try {
+		await Order.findByIdAndDelete(orderId);
+	} catch (error) {
+		throw new Error('Error while removing product from order');
+	}
+};
+
+export const removeOrder = async (): Promise<void> => {
+	try {
+		await Order.deleteMany();
+	} catch (error) {
+		throw new Error('Error while removing order');
+	}
 };

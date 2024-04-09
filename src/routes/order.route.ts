@@ -1,8 +1,15 @@
 import { Router } from 'express';
+import {
+	createOrder,
+	getOrderById,
+	getOrders,
+	removeAllOrders,
+	removeOrderById,
+} from '../controllers/order.controllers';
 
 export const router = Router();
-Router.get('/orders', getOrder);
-Router.get('/orders/:id', getOrderById);
-Router.post('/orders', addOrder);
-Router.delete('/orders/:id', removeOrder);
-Router.delete('/orders', removeAllOrder);
+router.get('/orders', getOrders);
+router.get('/orders/:id', getOrderById);
+router.post('/orders', createOrder);
+router.delete('/orders/:id', removeOrderById);
+router.delete('/orders', removeAllOrders);
