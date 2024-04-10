@@ -1,6 +1,7 @@
 import { IUser } from "../types/user.type";
 import { User } from "../models/user.models";
 import bcrypt from 'bcrypt';
+import { Jwt } from 'jsonwebtoken';
 
 export const registerUser = async (newUser: IUser): Promise<IUser> => {
     const userExists = await User.findOne({ email: newUser.email });
@@ -14,8 +15,8 @@ export const registerUser = async (newUser: IUser): Promise<IUser> => {
     return user;
 };
 
-// login user
-export const loginUser = async (email: string, password: string): Promise<IUser | null> => {
+// login user (funzionante)
+/* export const loginUser = async (email: string, password: string): Promise<IUser | null> => {
     const user = await User.findOne({ email });
     if (!user) {
         return null;
@@ -24,5 +25,23 @@ export const loginUser = async (email: string, password: string): Promise<IUser 
     if (isPasswordValid) {
         return user;
     }
+    return null;
+}; */
+
+
+
+export const loginUser = async (email: string, password: string): Promise<IUser | null> => {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+        return null;
+    }
+    
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (isPasswordValid) {
+        return user;
+    }
+
     return null;
 };

@@ -1,29 +1,28 @@
 import { Request, Response, NextFunction } from 'express';
-import { MongoCursorInUseError } from 'mongodb';
-import { User } from '../models/user.models';
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
 
-//const JWT_SECRET = process.env.JWT_SECRET;
-
-// TODO jwt
-
-/* export const VerifyToken = (req: Request, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization?.split(' ')[1];
-    console.log('token', token);
+// Funzione per verificare il token JWT
+export const verifyToken = (req: Request, res: Response, next: NextFunction) => {
+    // Estrai il token dalla richiesta
+    const token = req.header('Authorization')?.replace('Bearer ', '');
 
     if (!token) {
-        return res.status(401).json({ message: 'Token not provided' });
+        return res.status(401).json({ message: 'Authorization token missing' });
+    }
+
+    // Verifica il token utilizzando la chiave segreta
+    const secretKey = "test";
+    if (!secretKey) {
+        return res.status(500).json({ error: 'JWT secret key not valid' });
     }
 
     try {
-        if (!JWT_SECRET) {
-            throw new Error('JWT secret is not defined');
-        }
-
-        const decodedToken: any = jwt.verify(token, JWT_SECRET);
+        const decoded = jwt.verify(token, secretKey);
+        // Se il token è valido, aggiungi i dati decodificati alla richiesta e passa alla prossima funzione middleware
+        (req as any).decoded = decoded;
         next();
-    } catch (err) {
-        return res.status(401).json({ message: 'Invalid token' });
+    } catch (error) {
+        // Se il token non è valido, restituisci un errore di autorizzazione
+        return res.status(401).json({ error: 'Invalid token' });
     }
-}; */
+};

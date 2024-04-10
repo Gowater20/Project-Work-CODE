@@ -2,6 +2,7 @@ import Cart from '../models/cart.models';
 import { ICart } from '../types/cart.type';
 import { Product } from '../models/product.models';
 
+
 export const getCart = async (userId: string): Promise<ICart | null> => {
     try {
         const cart = await Cart.findOne({ user: userId });
@@ -21,7 +22,7 @@ export const addProductToCart = async (
         // create a cart for the user
         cart = await Cart.create({
             user: userId,
-            Products: [],
+            products: [],
         })
     }
     const product = await Product.findById(productId);
@@ -29,32 +30,13 @@ export const addProductToCart = async (
         throw new Error("Product not found");
     }
 
-    cart.Products.push(product);
+    cart.products.push(product);
     await cart.save();
 
     return cart;
 };
 
-
-/* 	export const removeProductFromCart = async (
-        productId: string | undefined
-    ): Promise<Icart | null> => {
-        try {
-            const product = await Product.findById(productId);
-            if (!product) {
-                throw new Error("Product not found");
-            }
-	
-            const cart = await Cart.findOneAndDelete(product);
-	
-            return cart;
-        } catch(error) {
-            throw new Error('Error while adding product to cart');
-        }
-    }; */
-
-
-    // non funzionante
+// non funzionante
 export const removeProductFromCart = async (
     userId: string,
     productId: string
@@ -75,9 +57,9 @@ export const removeProductFromCart = async (
         if (!product) {
             throw new Error("Prodotto non trovato");
         }
-
-        // Rimuovi il prodotto dall'array Products del carrello
-        cart.Products = cart.Products.filter((p:string) => p.toString() !== productId);
+//
+        // Rimuovi il prodotto dal carrello
+        cart.products.pull(product);
 
         // Salva l'aggiornamento del carrello nel database
         await cart.save();
@@ -91,14 +73,29 @@ export const removeProductFromCart = async (
     }
 };
 
-
-
-
 //clean cart
-export const removeCart = async (): Promise<void> => {
+export const clearCart = async (
+    userId: string,
+): Promise<ICart | null> => {
     try {
-        await Cart.deleteMany();
+        // Trova il carrello dell'utente
+        let userCart = await Cart.findOne({ user: userId });
+
+        // Se il carrello non esiste, lancia un'eccezione
+        if (!userCart) {
+            throw new Error("Carrello non trovato");
+        }
+
+        userCart.products = [];
+
+        // Salva l'aggiornamento del carrello nel database
+        await userCart.save();
+
+        // Ritorna l'oggetto cart aggiornato
+        return userCart;
     } catch (error) {
-        throw new Error('Error while removing cart');
+        // Gestisci gli errori
+        console.error("Errore durante la rimozione dei prodotti all'interno del carrello:", error);
+        return null;
     }
 };

@@ -8,9 +8,9 @@ POST http://localhost:3000/api/auth/register
 Content-Type: application/json
 
 {
-    "name": "provaUser53",
+    "name": "provaUser5343",
     "surname": "cognomeUser",
-    "email": "provaUser53@gmail.com",
+    "email": "provaUser5343@gmail.com",
     "password": "test123"
 }
 
@@ -23,3 +23,8 @@ Content-Type: application/json
     "email": "provaUser53@gmail.com",
     "password": "test123"
 }
+
+###
+// mostra l'utente attualmente autenticato 
+GET http://localhost:3000/api/auth/user
+Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTI3NjI4NzksImV4cCI6MTczODY4Mjg3OX0.itsSgwCw3Z0phNMEOJC06hR4nurrY8KYigqgmxeK2eM"

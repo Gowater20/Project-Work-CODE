@@ -11,10 +11,10 @@ POST http://localhost:3000/api/products/
 Content-Type: application/json
 
 {
-    "name": "fantastic product",
+    "name": "bel prodotto",
     "brand": "Dream Brands Inc.",
-    "quantity": 40,
-    "price": 49.99,
+    "quantity": 30,
+    "price": 30.99,
     "sale": 0.2
 }
 
