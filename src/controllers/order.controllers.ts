@@ -7,6 +7,7 @@ import {
 	newOrder,
 } from '../services/order.service';
 
+// da testare
 export const getOrders = async (req: Request, res: Response) => {
 	try {
 		const orders = await showOrder();
@@ -19,6 +20,7 @@ export const getOrders = async (req: Request, res: Response) => {
 	}
 };
 
+// da testare
 export const getOrderById = async (req: Request, res: Response) => {
 	const orderId = req.params.id;
 	try {
@@ -37,6 +39,7 @@ export const getOrderById = async (req: Request, res: Response) => {
 	}
 };
 
+// da testare
 export const createOrder = async (req: Request, res: Response) => {
 	const orderData = req.body;
 	try {
@@ -50,6 +53,7 @@ export const createOrder = async (req: Request, res: Response) => {
 	}
 };
 
+// da testare
 export const removeOrderById = async (req: Request, res: Response) => {
 	const orderId = req.params.id;
 	try {
@@ -63,6 +67,7 @@ export const removeOrderById = async (req: Request, res: Response) => {
 	}
 };
 
+// da testare
 export const removeAllOrders = async (req: Request, res: Response) => {
 	try {
 		await removeOrder();

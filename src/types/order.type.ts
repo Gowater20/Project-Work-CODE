@@ -1,6 +1,6 @@
 export interface Iorder {
-	id: string;
-	Icart: {
+	_id?: string;
+	ICart: {
 		id: string;
 	};
 	payment: {

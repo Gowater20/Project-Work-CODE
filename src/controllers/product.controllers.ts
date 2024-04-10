@@ -2,7 +2,7 @@ import { createProduct, deleteProduct, showAllProducts, showProduct, upGrateProd
 import { IProduct } from "../types/product.type";
 import { Request, Response } from "express";
 
-
+// funzionante
 export const getProductById = async (req: Request, res: Response) => {
 	try {
 		const products = await showProduct(req.params.id);
@@ -16,6 +16,8 @@ export const getProductById = async (req: Request, res: Response) => {
 	}
 };
 
+// funzionante
+
 export const getProducts = async (req: Request, res: Response) => {
 	try {
 		const products = await showAllProducts();
@@ -24,6 +26,8 @@ export const getProducts = async (req: Request, res: Response) => {
 		res.status(500).json("message:errore");
 	}
 };
+
+// funzionante
 
 export const addProduct = async (req: Request, res: Response) => {
 	try {
@@ -36,6 +40,8 @@ export const addProduct = async (req: Request, res: Response) => {
 		res.status(400).json("Bad Request");
 	}
 };
+
+// funzionante
 
 export const updateProduct = async (req: Request, res: Response) => {
     try {
@@ -50,6 +56,8 @@ export const updateProduct = async (req: Request, res: Response) => {
         res.status(500).json({ message: "Errore interno del server" });
     }
 };
+
+// funzionante
 
 export const deletedProduct = async (req: Request, res: Response) => {
 	try {

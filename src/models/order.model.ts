@@ -3,8 +3,9 @@ import { Iorder } from '../types/order.type';
 
 const orderSchema = new mongoose.Schema<Iorder>(
 	{
-		id: { type: String, required: true },
-		Icart: { type: mongoose.Schema.Types.ObjectId, ref: 'Cart' },
+		// rincontrolla id e type id
+		_id: { type: String, required: true }, 
+		ICart: { type: mongoose.Schema.Types.ObjectId, ref: 'Cart' },
 		payment: { method: String },
 		status: {
 			type: String,

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
-import { Icart } from '../types/cart.type';
+import { ICart } from '../types/cart.type';
 
-const cartSchema = new mongoose.Schema<Icart>(
+const cartSchema = new mongoose.Schema<ICart>(
 	{
 		user: {
             type: mongoose.Schema.Types.ObjectId,
@@ -17,6 +17,6 @@ const cartSchema = new mongoose.Schema<Icart>(
 	{ timestamps: true }
 );
 
-const Cart = mongoose.model<Icart>('Cart', cartSchema);
+const Cart = mongoose.model<ICart>('Cart', cartSchema);
 
 export default Cart;

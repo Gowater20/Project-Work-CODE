@@ -3,8 +3,10 @@ import {
 	getCart,
 	addProductToCart,
 	removeCart,
+	removeProductFromCart
 } from '../services/cart.service';
 
+// da rivedere (non funzionante)
 export const getCartController = async (req: Request, res: Response) => {
     const userId = req.body.userId; // TODO recuperare id utente dal JWT token
 	try {
@@ -19,6 +21,7 @@ export const getCartController = async (req: Request, res: Response) => {
     }
 };
 
+// da rivedere (non funzionante)
 export const addProductToCartController = async (
 	req: Request,
 	res: Response
@@ -37,14 +40,16 @@ export const addProductToCartController = async (
 	}
 };
 
+// da rivedere (non funzionante)
 export const removeProductFromCartController = async (
 	req: Request,
 	res: Response
 ) => {
-	const { id } = req.params;
-	const productName = req.body.name;
+	const productId= req.params.id; // id del prodotto
+	const userId = req.params.userId; // id dell'utente associato al carrello
+
 	try {
-		const cart = await removeProductFromCart(id, productName);
+		const cart = await removeProductFromCart(userId, productId);
 		res.status(200).json({ success: true, data: cart });
 	} catch (error) {
 		res.status(500).json({
@@ -54,6 +59,7 @@ export const removeProductFromCartController = async (
 	}
 };
 
+// da rivedere (non funzionante)
 export const removeCartController = async (req: Request, res: Response) => {
 	try {
 		await removeCart();

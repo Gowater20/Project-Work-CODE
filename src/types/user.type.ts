@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
 export interface IUser {
-    //id creato automaticamente da mongodb
+    _id?: String,
     name: String;
     surname: String;
     email: string;

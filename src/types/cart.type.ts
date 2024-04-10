@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
 
-export interface Icart {
+export interface ICart {
 	user: Schema.Types.ObjectId;
 	Products: {
 		filter(arg0: (product: any) => boolean): {
@@ -11,7 +11,10 @@ export interface Icart {
 			quantity: number;
 			brand: string;
 			sales: number;
-		};
-		push: any;
+		}[]; // aggiunto per indicare che è un array (per typescript)
 	};
+	push: any;
 }
+
+
+

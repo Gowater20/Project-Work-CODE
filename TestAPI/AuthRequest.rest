@@ -3,21 +3,23 @@ GET http://localhost:3000/
 
 
 ###
+// registrazione
 POST http://localhost:3000/api/auth/register
 Content-Type: application/json
 
 {
-    "name": "provaUser3",
+    "name": "provaUser53",
     "surname": "cognomeUser",
-    "email": "provaUser3@gmail.com",
+    "email": "provaUser53@gmail.com",
     "password": "test123"
 }
 
 ###
+//login 
 POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-    "email": "provaUser3@gmail.com",
+    "email": "provaUser53@gmail.com",
     "password": "test123"
 }
