@@ -3,16 +3,17 @@ import { IOrder } from '../types/order.type';
 import { ICart } from '../types/cart.type';
 const orderSchema = new Schema<IOrder>(
     {
-        _id: { type: Schema.Types.ObjectId, required: true },
         cart: { type: Schema.Types.ObjectId, ref: 'Cart', required: true },
-        //status: { type: String, default: 'pending' },
-		name: { type: String, required: true },
-		surname: { type: String, required: true },
-        address: { type: String, required: true },
-        city: { type: String, required: true },
-        region: { type: String, required: true },
-        state: { type: String, required: true },
-        postalCode: { type: String, required: true }
+        // TODO status: { type: String, default: 'pending' },
+        infoData: {
+            name: { type: String, required: false },
+            surname: { type: String, required: false },
+            address: { type: String, required: false },
+            city: { type: String, required: false},
+            region: { type: String, required: false },
+            state: { type: String, required: false },
+            postalCode: { type: String, required: false }
+        }
     },
     { timestamps: true }
 );

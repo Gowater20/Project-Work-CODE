@@ -14,7 +14,6 @@ export const registerUser = async (newUser: IUser): Promise<IUser> => {
     return user;
 };
 
-// login user (funzionante)
 export const matchUser = async (email: string, password: string): Promise<IUser | null> => {
     const user = await User.findOne({ email });
     if (!user) {

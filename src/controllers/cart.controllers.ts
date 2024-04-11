@@ -2,14 +2,13 @@ import { Request, Response } from 'express';
 import {
 	getCart,
 	addProductToCart,
-	removeProductFromCart,
+	removeProductToCart,
 	clearCart
 } from '../services/cart.service';
-import Cart from '../models/cart.models';
 
-// mostra tutti i prodotti (funzionante)
+// show all product by cart
 export const getCartController = async (req: Request, res: Response) => {
-    const userId = "66144f37c750c125fda509fa"; // TODO recuperare id utente dal JWT token
+    const userId = "66144d3ecd968b084ebe34c5"; // TODO recuperare id utente dal JWT token
 	try {
         const cart = await getCart(userId);
         if (!cart) {
@@ -22,7 +21,7 @@ export const getCartController = async (req: Request, res: Response) => {
     }
 };
 
-// aggiunge un prodotto (funzionante)
+// add product in the cart
 export const addProductToCartController = async (
 	req: Request,
 	res: Response
@@ -41,16 +40,16 @@ export const addProductToCartController = async (
 	}
 };
 
-// rimuove il prodotto dal carrello (funzionante)
-export const removeProductFromCartController = async (
+// remove product to cart
+export const removeProductCartController = async (
 	req: Request,
 	res: Response
 ) => {
-	const productId= req.params.id; // id del prodotto
-	const userId =  "66144f37c750c125fda509fa" // req.params.userId; // id dell'utente associato al carrello (tramite token)
+	const productId= req.params.id;
+	const userId =  "66144d3ecd968b084ebe34c5" // TODO associa id utente tramite token
 
 	try {
-		const deletedProduct = await removeProductFromCart(userId, productId);
+		const deletedProduct = await removeProductToCart(userId, productId);
 		res.status(200).json({ success: true, data: deletedProduct}); // TODO inserisci carrello aggiornato
 	} catch (error) {
 		res.status(500).json({
@@ -60,9 +59,9 @@ export const removeProductFromCartController = async (
 	}
 };
 
-// pulisci carrello (funzionante) 
-export const removeCartController = async (req: Request, res: Response) => {
-	const userId =  "66144d3ecd968b084ebe34c5" // req.params.userId; // id dell'utente associato al carrello (tramite token)
+// clear cart
+export const clearCartController = async (req: Request, res: Response) => {
+	const userId =  "66144d3ecd968b084ebe34c5" // TODO associa id utente tramite token
 	try {
 		await clearCart(userId);
 		res.status(200).json({ message: "cart cleared" });
@@ -73,22 +72,3 @@ export const removeCartController = async (req: Request, res: Response) => {
 		});
 	}
 };
-
-// TODO non richiesto; aggiungi successivamente
-/* export const getProduct = async (req: Request, res: Response) => {
-	const productId = req.params.id;
-	try {
-		const product = await getProductFromCart(productId);
-		if (!product) {
-			return res
-				.status(404)
-				.json({ success: false, error: 'Product not found in cart' });
-		}
-		res.status(200).json({ success: true, data: product });
-	} catch (error) {
-		res.status(500).json({
-			success: false,
-			error: 'Error while fetching product from cart',
-		});
-	}
-}; */

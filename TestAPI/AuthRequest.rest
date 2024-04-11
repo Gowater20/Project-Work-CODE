@@ -3,7 +3,7 @@ GET http://localhost:3000/
 
 
 ###
-// registrazione
+// register
 POST http://localhost:3000/api/auth/register
 Content-Type: application/json
 
@@ -25,6 +25,6 @@ Content-Type: application/json
 }
 
 ###
-// mostra l'utente attualmente autenticato 
+// show user info
 GET http://localhost:3000/api/auth/user
 Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTI3ODY0MDUsImV4cCI6MTcxMjg3MjgwNX0.ukI4x7f982HmduembD5wUd0tNkKdWCFWiTtLHaNcE8s"

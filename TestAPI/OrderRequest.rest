@@ -10,14 +10,7 @@ GET http://localhost:3000/api/orders
 POST http://localhost:3000/api/orders
 Content-Type: application/json
 
-{
-    "name": "ciccio",
-    "surname": "bello",
-    "address": "via roma n.123",
-    "city": "Roma",
-    "region": "Lazio",
-    "state": "Italia",
-    "postalcode": "00010"
+{   
 }
 
 // delete producut by id

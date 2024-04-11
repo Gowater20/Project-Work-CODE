@@ -2,11 +2,11 @@
 GET http://localhost:3000/
 
 ###
-// show all product (no admin)
+// show all product
 GET http://localhost:3000/api/products/
 
 ###
-// add new product (user)
+// add new product
 POST http://localhost:3000/api/products/
 Content-Type: application/json
 
@@ -28,14 +28,14 @@ GET http://localhost:3000/api/products/66165bdace5e23db9529385e
 DELETE  http://localhost:3000/api/products/66165bdace5e23db9529385e
 
 
-// aggiorna product by id 
+// updrade product by id 
 ###
 PUT http://localhost:3000/api/products/661505b33fdb4d3ae1fc7995
 Content-Type: application/json
 
 {
     "id": "321",
-    "name": "Fantasy Product fabio",
+    "name": "Fantasy Product To buy",
     "brand": "Dream Brands Inc.",
     "quantity": 80,
     "price": 99.99,

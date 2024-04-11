@@ -13,8 +13,6 @@ app.get("/", (req, res) => {
     res.json({ message: "Server is online" });
 });
 
-
-//rotta per autenticazione
 app.use("/api/auth/", authApi);
 app.use("/api/products/", productApi);
 app.use("/api/cart/", cartApi);

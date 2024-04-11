@@ -1,11 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { registerUser, matchUser } from '../services/user.service';
 import { IUser } from '../types/user.type';
-import { Jwt } from 'jsonwebtoken';
 import { createSecretToken } from '../utils/user.utils';
-import bcrypt from 'bcrypt';
-
-// funzionante
 
 export const Signup = async (req: Request, res: Response) => {
     try {
@@ -17,27 +13,8 @@ export const Signup = async (req: Request, res: Response) => {
         return res.status(500).json({ error: err.message });
     }
 };
-//   Funzionante
 
-
-/* export const Login = async (req: Request, res: Response) => {
-    try {
-        const { email, password } = req.body;
-        const user = await loginUser(email, password);
-        if (!user) {
-            return res.status(400).json({ message: "Wrong email or password" });
-        }
-        // TODO inserisci token
-        //const token = createSecretToken(userByEmail.id!, 30);
-        //return res.status(200).json({ user: userByEmail, token });
-
-        return res.status(200).json({ user });
-    } catch (err: any) {
-        return res.status(500).json({ error: err.message });
-    }
-}; */
-
-// funzionante con token (mia versione)
+// TODO admin register
 
 export const Login = async (req: Request, res: Response) => {
     try {
@@ -68,29 +45,5 @@ export const Login = async (req: Request, res: Response) => {
 };
 
 // TODO getUserLogged
-
-// Middleware per verificare l'autenticazione dell'utente
-/* export const authenticateUser = (req: Request, res: Response, next: NextFunction) => {
-    // Ottenere il token dal cookie
-    const token = req.cookies.token;
-
-    // Verifica se il token è presente
-    if (!token) {
-        return res.status(401).json({ message: 'Accesso negato. Token non fornito.' });
-    }
-
-    try {
-        // Verifica il token
-        const decoded = jwt.verify(token, process.env.JWT_SECRET) as { id: string };
-
-        // Aggiungi l'ID utente alla richiesta per l'uso successivo nelle route
-        req.userId = decoded.id;
-
-        // Passa alla prossima funzione middleware o alla route
-        next();
-    } catch (error) {
-        // Se il token non è valido
-        return res.status(403).json({ message: 'Accesso negato. Token non valido.' });
-    }
-}; */
+// TODO userInfo
 
