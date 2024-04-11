@@ -31,10 +31,10 @@ export const Login = async (req: Request, res: Response) => {
         }
 
         const token = createSecretToken(email.id, 1);
-        console.log(token)
         console.log(res.cookie("token", token, {
             httpOnly: false,
             //TODO aggiungi altri sistemi di sicurezza
+            //TODO aggiungi refresh token 
         }));
         res
             .status(201)
@@ -44,6 +44,22 @@ export const Login = async (req: Request, res: Response) => {
     }
 };
 
+//TODO logout
+
+export const Logout = (req: Request, res: Response) => {
+    try {
+        res.clearCookie("token");
+        res
+            .status(200)
+            .json({ message: "User logged out successfully", success: true });
+    } catch (error) {
+        console.error({ message: "server error", error });
+    }
+};
+
+
+
+
 // TODO getUserLogged
-// TODO userInfo
+
 
