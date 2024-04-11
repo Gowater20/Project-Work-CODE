@@ -1,6 +1,7 @@
-import { Request, Response } from 'express';
-import { registerUser, loginUser } from '../services/user.service';
+import { Request, Response, NextFunction } from 'express';
+import { registerUser, matchUser } from '../services/user.service';
 import { IUser } from '../types/user.type';
+import { createSecretToken } from '../utils/user.utils';
 
 export const Signup = async (req: Request, res: Response) => {
     try {
@@ -13,25 +14,52 @@ export const Signup = async (req: Request, res: Response) => {
     }
 };
 
+// TODO admin register
+
 export const Login = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body;
-        const user = await loginUser(email, password);
+        const user = await matchUser(email, password);
         if (!user) {
             return res.status(400).json({ message: "Wrong email or password" });
         }
-        // TODO inserisci token
-        //const token = createSecretToken(userByEmail.id!, 30);
-        //return res.status(200).json({ user: userByEmail, token });
 
-        return res.status(200).json({ user });
-    } catch (err: any) {
-        return res.status(500).json({ error: err.message });
+        const secretKey = process.env.JWT_SECRET;
+
+        if (!secretKey) {
+            throw new Error('JWT secret key not valid');
+        }
+
+        const token = createSecretToken(email.id, 1);
+        console.log(res.cookie("token", token, {
+            httpOnly: false,
+            //TODO aggiungi altri sistemi di sicurezza
+            //TODO aggiungi refresh token 
+        }));
+        res
+            .status(201)
+            .json({ message: "User logged", success: true });
+    } catch (error) {
+        console.error(error);
     }
 };
 
+//TODO logout
+
+export const Logout = (req: Request, res: Response) => {
+    try {
+        res.clearCookie("token");
+        res
+            .status(200)
+            .json({ message: "User logged out successfully", success: true });
+    } catch (error) {
+        console.error({ message: "server error", error });
+    }
+};
+
+
+
+
 // TODO getUserLogged
-/* 
-export const getUserLogged = async (req: Request, res: Response) => {
-    
-} */
+
+

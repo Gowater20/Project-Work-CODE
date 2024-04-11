@@ -2,11 +2,13 @@ import { Request, Response } from 'express';
 import {
 	getCart,
 	addProductToCart,
-	removeCart,
+	removeProductToCart,
+	clearCart
 } from '../services/cart.service';
 
+// show all product by cart
 export const getCartController = async (req: Request, res: Response) => {
-    const userId = req.body.userId; // TODO recuperare id utente dal JWT token
+    const userId = "66144d3ecd968b084ebe34c5"; // TODO recuperare id utente dal JWT token
 	try {
         const cart = await getCart(userId);
         if (!cart) {
@@ -19,6 +21,7 @@ export const getCartController = async (req: Request, res: Response) => {
     }
 };
 
+// add product in the cart
 export const addProductToCartController = async (
 	req: Request,
 	res: Response
@@ -37,15 +40,17 @@ export const addProductToCartController = async (
 	}
 };
 
-export const removeProductFromCartController = async (
+// remove product to cart
+export const removeProductCartController = async (
 	req: Request,
 	res: Response
 ) => {
-	const { id } = req.params;
-	const productName = req.body.name;
+	const productId= req.params.id;
+	const userId =  "66144d3ecd968b084ebe34c5" // TODO associa id utente tramite token
+
 	try {
-		const cart = await removeProductFromCart(id, productName);
-		res.status(200).json({ success: true, data: cart });
+		const deletedProduct = await removeProductToCart(userId, productId);
+		res.status(200).json({ success: true, data: deletedProduct}); // TODO inserisci carrello aggiornato
 	} catch (error) {
 		res.status(500).json({
 			success: false,
@@ -54,31 +59,16 @@ export const removeProductFromCartController = async (
 	}
 };
 
-export const removeCartController = async (req: Request, res: Response) => {
+// clear cart
+export const clearCartController = async (req: Request, res: Response) => {
+	const userId =  "66144d3ecd968b084ebe34c5" // TODO associa id utente tramite token
 	try {
-		await removeCart();
-		res.status(200).json({ success: true });
+		await clearCart(userId);
+		res.status(200).json({ message: "cart cleared" });
 	} catch (error) {
 		res.status(500).json({
 			success: false,
 			error: 'Error while removing cart',
-		});
-	}
-};
-export const getProduct = async (req: Request, res: Response) => {
-	const productId = req.params.id;
-	try {
-		const product = await getProductFromCart(productId);
-		if (!product) {
-			return res
-				.status(404)
-				.json({ success: false, error: 'Product not found in cart' });
-		}
-		res.status(200).json({ success: true, data: product });
-	} catch (error) {
-		res.status(500).json({
-			success: false,
-			error: 'Error while fetching product from cart',
 		});
 	}
 };

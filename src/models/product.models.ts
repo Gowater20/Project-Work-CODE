@@ -3,10 +3,6 @@ import { IProduct } from "../types/product.type";
 
 const productSchema = new mongoose.Schema<IProduct>(
 	{
-		id: {
-			type: String,
-			required: true,
-		},
 		name: {
 			type: String,
 			required: true,

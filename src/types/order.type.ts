@@ -1,20 +1,18 @@
-export interface Iorder {
-	id: string;
-	Icart: {
-		id: string;
-	};
-	payment: {
-		method: string;
-	};
-	status: string;
-	total: number;
-	createdAt: Date;
-	updatedAt: Date;
-	address: {
-		street: string;
-		city: string;
-	};
-	postalcode: number;
-	phone: number;
-	notes: string;
+import { Schema } from 'mongoose';
+
+export interface IOrder{
+    _id?: string;
+    cart: Schema.Types.ObjectId;
+    //TODO status
+    infoData: {
+        name: string,
+        surname: string,
+        address: string;
+        city: string;
+        region: string;
+        state: string;
+        postalCode: string;
+    }
+    createdAt?: Date;
+    updatedAt?: Date;
 }

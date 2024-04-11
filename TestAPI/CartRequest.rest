@@ -2,12 +2,12 @@
 GET http://localhost:3000/
 
 ###
-// show cart (no admin)
-GET http://localhost:3000/api/cart/
+// show cart 
+GET http://localhost:3000/api/cart
 
 ###
-// add new product to cart (user)
-POST http://localhost:3000/api/cart/add/661505b33fdb4d3ae1fc7995
+// add new product to cart
+POST http://localhost:3000/api/cart/add/6616a5ba793ea56aeaf6ddbb
 Content-Type: application/json
 
 {
@@ -16,7 +16,7 @@ Content-Type: application/json
 
 // delete producut by id
 ###
-DELETE  http://localhost:3000/api/cart/remove/idddddddd
+DELETE  http://localhost:3000/api/cart/remove/6616a5ba793ea56aeaf6ddbb
 
 
 // delete all product by cart

@@ -1,7 +1,5 @@
-import { Schema } from "mongoose";
-
 export interface IProduct {
-	id: string;
+	_id?: string;
 	name: String;
 	brand: String;
 	quantity: number;

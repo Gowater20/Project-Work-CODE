@@ -4,11 +4,11 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 
-const CONNECTION_URL='mongodb://localhost:27017/ProjectWorkCode';
+const CONNECTION_URL=process.env.MONGO_URL
 const PORT = process.env.PORT || 4000;
 const DB = async () => {
     try {
-        await mongoose.connect(CONNECTION_URL);
+        await mongoose.connect(CONNECTION_URL!);
         console.log('Connected to MongoDB');
         app.listen(PORT, () => {
             console.log(`server is online at http://localhost:${PORT}`);

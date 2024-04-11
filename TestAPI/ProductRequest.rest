@@ -2,41 +2,40 @@
 GET http://localhost:3000/
 
 ###
-// show all product (no admin)
+// show all product
 GET http://localhost:3000/api/products/
 
 ###
-// add new product (user)
+// add new product
 POST http://localhost:3000/api/products/
 Content-Type: application/json
 
 {
-    "id": "987",
-    "name": "fantastic product",
+    "name": "bel prodotto",
     "brand": "Dream Brands Inc.",
-    "quantity": 40,
-    "price": 49.99,
+    "quantity": 30,
+    "price": 30.99,
     "sale": 0.2
 }
 
 ###
 // get product by id
-GET http://localhost:3000/api/products/661505b33fdb4d3ae1fc7995
+GET http://localhost:3000/api/products/66165bdace5e23db9529385e
 
 
 // delete producut by id
 ###
-DELETE  http://localhost:3000/api/products/6615124897a8063ebc55156f
+DELETE  http://localhost:3000/api/products/66165bdace5e23db9529385e
 
 
-// aggiorna product by id 
+// updrade product by id 
 ###
 PUT http://localhost:3000/api/products/661505b33fdb4d3ae1fc7995
 Content-Type: application/json
 
 {
     "id": "321",
-    "name": "Fantasy Product fabio",
+    "name": "Fantasy Product To buy",
     "brand": "Dream Brands Inc.",
     "quantity": 80,
     "price": 99.99,

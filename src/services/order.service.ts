@@ -1,7 +1,8 @@
 import Order from '../models/order.model';
-import { Iorder } from '../types/order.type';
+import { ICart } from '../types/cart.type';
+import { IOrder } from '../types/order.type';
 
-export const showOrder = async (): Promise<Iorder[]> => {
+export const showOrder = async (userId: string): Promise<IOrder[]> => {
 	try {
 		const orders = await Order.find();
 		return orders;
@@ -10,38 +11,32 @@ export const showOrder = async (): Promise<Iorder[]> => {
 	}
 };
 
-export const showOrderById = async (
-	orderId: string
-): Promise<Iorder | null> => {
+export const addCartToOrder = async (
+	cartId: string,
+	infoData: object
+): Promise<ICart | any> => {
 	try {
-		const order = await Order.findById(orderId);
+		const order = await Order.create( {cart: cartId} , infoData );
 		return order;
 	} catch (error) {
-		throw new Error('Error while fetching order by id');
+		console.error("Order not created", error);
+		return null;
 	}
 };
 
-export const newOrder = async (orderData: any): Promise<Iorder> => {
-	try {
-		const order = await Order.create(orderData);
-		return order;
-	} catch (error) {
-		throw new Error('Error while adding product to order');
-	}
+// TODO service for GETById
+/*export const getOrderById = async (id: string): Promise<IOrder | null> => {
+	return await Order.findById(id);
 };
+*/
 
-export const removeProductFromCart = async (orderId: string): Promise<void> => {
+// TODO service for upgradeStateOrder by id
+
+export const removeCartToOrder = async (orderId: string): Promise<void> => {
 	try {
 		await Order.findByIdAndDelete(orderId);
-	} catch (error) {
-		throw new Error('Error while removing product from order');
-	}
-};
-
-export const removeOrder = async (): Promise<void> => {
-	try {
-		await Order.deleteMany();
 	} catch (error) {
 		throw new Error('Error while removing order');
 	}
 };
+

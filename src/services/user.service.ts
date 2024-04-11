@@ -14,8 +14,7 @@ export const registerUser = async (newUser: IUser): Promise<IUser> => {
     return user;
 };
 
-// login user
-export const loginUser = async (email: string, password: string): Promise<IUser | null> => {
+export const matchUser = async (email: string, password: string): Promise<IUser | null> => {
     const user = await User.findOne({ email });
     if (!user) {
         return null;
@@ -25,4 +24,4 @@ export const loginUser = async (email: string, password: string): Promise<IUser 
         return user;
     }
     return null;
-};
+}; 

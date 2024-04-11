@@ -1,15 +1,13 @@
 import { Request, Response } from 'express';
-import {
-	showOrder,
-	showOrderById,
-	removeProductFromCart,
-	removeOrder,
-	newOrder,
-} from '../services/order.service';
+import Cart from '../models/cart.models';
+import { addCartToOrder, removeCartToOrder, showOrder } from '../services/order.service';
 
-export const getOrders = async (req: Request, res: Response) => {
+
+// show orders
+export const getOrdersController = async (req: Request, res: Response) => {
+	const userId = req.body.userId;
 	try {
-		const orders = await showOrder();
+		const orders = await showOrder(userId);
 		res.status(200).json({ success: true, data: orders });
 	} catch (error) {
 		res.status(500).json({
@@ -19,41 +17,54 @@ export const getOrders = async (req: Request, res: Response) => {
 	}
 };
 
-export const getOrderById = async (req: Request, res: Response) => {
-	const orderId = req.params.id;
+// create new order from cart
+export const createOrderController = async (req: Request, res: Response) => {
+	//const { name, surname, address, city, region, state, postalCode} = req.body;
+
 	try {
-		const order = await showOrderById(orderId);
-		if (!order) {
-			return res
-				.status(404)
-				.json({ success: false, error: 'Order not found' });
+		const userCart = "6616a9ffca4167fcca78d422"
+		//TODO inserisci dati dal token
+		// TODO cerca carrello dall'utente loggato
+		const cart = await Cart.findById(userCart)
+
+		// Verifica se il carrello contiene prodotti
+		if (!cart || cart.products.length === 0) {
+			return res.status(400).json({ success: false, error: 'Cart is empty' });
 		}
-		res.status(200).json({ success: true, data: order });
+		// Create the new order
+		const shipmentData = req.body;
+		const newOrder = await addCartToOrder(cart, shipmentData );
+
+		res.status(201).json({ success: true, order: newOrder });
 	} catch (error) {
-		res.status(500).json({
-			success: false,
-			error: 'Error while getting order by id',
-		});
+		console.error("Server not response for create order", error);
+		res.status(500).json({ success: false, error: 'Errore durante la creazione dell\'ordine' });
 	}
 };
 
-export const createOrder = async (req: Request, res: Response) => {
-	const orderData = req.body;
+//TODO getOrderById
+/*
+export const getOrderByIdController = async (req: Request, res: Response) => {
 	try {
-		const order = await newOrder(orderData);
-		res.status(201).json({ success: true, data: order });
-	} catch (error) {
-		res.status(500).json({
-			success: false,
-			error: 'Error while creating order',
-		});
+		const orders = await getOrderByID(req.params.id);
+		if (orders) {
+			res.status(200).json(orders);
+		} else {
+			throw new Error("Order not found");
+		}
+	} catch {
+		res.status(500).json({ success: false, error: 'Error while getting the order'});
 	}
 };
+*/
 
-export const removeOrderById = async (req: Request, res: Response) => {
+
+//TODO upgradeStateOrder
+
+export const removeOrderController = async (req: Request, res: Response) => {
 	const orderId = req.params.id;
 	try {
-		await removeProductFromCart(orderId);
+		await removeCartToOrder(orderId);
 		res.status(200).json({ success: true });
 	} catch (error) {
 		res.status(500).json({
@@ -63,14 +74,6 @@ export const removeOrderById = async (req: Request, res: Response) => {
 	}
 };
 
-export const removeAllOrders = async (req: Request, res: Response) => {
-	try {
-		await removeOrder();
-		res.status(200).json({ success: true });
-	} catch (error) {
-		res.status(500).json({
-			success: false,
-			error: 'Error while deleting all orders',
-		});
-	}
-};
+function getOrderByID(id: string) {
+	throw new Error('Function not implemented.');
+}
