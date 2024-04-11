@@ -27,4 +27,4 @@ Content-Type: application/json
 ###
 // mostra l'utente attualmente autenticato 
 GET http://localhost:3000/api/auth/user
-Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTI3NjI4NzksImV4cCI6MTczODY4Mjg3OX0.itsSgwCw3Z0phNMEOJC06hR4nurrY8KYigqgmxeK2eM"
+Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTI3ODY0MDUsImV4cCI6MTcxMjg3MjgwNX0.ukI4x7f982HmduembD5wUd0tNkKdWCFWiTtLHaNcE8s"

@@ -18,6 +18,6 @@ app.get("/", (req, res) => {
 app.use("/api/auth/", authApi);
 app.use("/api/products/", productApi);
 app.use("/api/cart/", cartApi);
-app.use("/api/orders/", cartApi);
+app.use("/api/orders/", orderApi);
 
 

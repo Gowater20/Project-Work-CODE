@@ -1,7 +1,11 @@
+import Cart from '../models/cart.models';
 import Order from '../models/order.model';
-import { Iorder } from '../types/order.type';
+import { ICart } from '../types/cart.type';
+import { IOrder } from '../types/order.type';
+import mongoose, { Document, Schema, ObjectId } from 'mongoose';
 
-export const showOrder = async (): Promise<Iorder[]> => {
+
+export const showOrder = async (userId: string): Promise<IOrder[]> => {
 	try {
 		const orders = await Order.find();
 		return orders;
@@ -12,7 +16,7 @@ export const showOrder = async (): Promise<Iorder[]> => {
 
 export const showOrderById = async (
 	orderId: string
-): Promise<Iorder | null> => {
+): Promise<IOrder | null> => {
 	try {
 		const order = await Order.findById(orderId);
 		return order;
@@ -21,14 +25,26 @@ export const showOrderById = async (
 	}
 };
 
-export const newOrder = async (orderData: any): Promise<Iorder> => {
+
+export const addCartToOrder = async (cartId: object): Promise<ICart | any> => {
 	try {
-		const order = await Order.create(orderData);
+		//crea un nuovo ordine
+		const order = await Order.create({ cartId });
+
+		await order.save();
+		console.log("questo è l'ordineeeeee", order)
+
+		// Restituisci l'ordine aggiornato
 		return order;
 	} catch (error) {
-		throw new Error('Error while adding product to order');
+		// Gestisci gli errori
+		console.error("Order not created", error);
+		return null;
 	}
 };
+
+
+
 
 export const removeProductFromCart = async (orderId: string): Promise<void> => {
 	try {

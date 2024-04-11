@@ -1,25 +1,23 @@
-import mongoose from 'mongoose';
-import { Iorder } from '../types/order.type';
-
-const orderSchema = new mongoose.Schema<Iorder>(
-	{
-		// rincontrolla id e type id
-		_id: { type: String, required: true }, 
-		ICart: { type: mongoose.Schema.Types.ObjectId, ref: 'Cart' },
-		payment: { method: String },
-		status: {
-			type: String,
-			required: true,
-			enum: ['pending', 'processing', 'shipped', 'delivered'],
-		},
-		total: { type: Number, required: true },
-		address: { street: String, city: String, required: true },
-		postalcode: { type: Number, required: true },
-		phone: { type: Number, required: false },
-		notes: { type: String, required: false },
-	},
-	{ timestamps: true }
+import mongoose, { Schema, Document } from 'mongoose';
+import { IOrder } from '../types/order.type';
+import { ICart } from '../types/cart.type';
+const orderSchema = new Schema<IOrder>(
+    {
+        _id: { type: Schema.Types.ObjectId, required: true },
+        cart: { type: Schema.Types.ObjectId, ref: 'Cart', required: true },
+        //status: { type: String, default: 'pending' },
+		name: { type: String, required: true },
+		surname: { type: String, required: true },
+        address: { type: String, required: true },
+        city: { type: String, required: true },
+        region: { type: String, required: true },
+        state: { type: String, required: true },
+        postalCode: { type: String, required: true }
+    },
+    { timestamps: true }
 );
 
-const Order = mongoose.model<Iorder>('Order', orderSchema);
+// Modello per l'ordine
+const Order = mongoose.model<IOrder>('Order', orderSchema);
+
 export default Order;
