@@ -25,6 +25,11 @@ export const addCartToOrder = async (
 };
 
 // TODO service for GETById
+/*export const getOrderById = async (id: string): Promise<IProduct | null> => {
+	return await Order.findById(id);
+};
+*/
+
 // TODO service for upgradeStateOrder by id
 
 export const removeCartToOrder = async (orderId: string): Promise<void> => {

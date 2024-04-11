@@ -43,6 +43,22 @@ export const createOrderController = async (req: Request, res: Response) => {
 };
 
 //TODO getOrderById
+/*
+export const getOrderByIdController = async (req: Request, res: Response) => {
+	try {
+		const orders = await getOrderByID(req.params.id);
+		if (orders) {
+			res.status(200).json(orders);
+		} else {
+			throw new Error("Order not found");
+		}
+	} catch {
+		res.status(500).json({ success: false, error: 'Error while getting the order'});
+	}
+};
+*/
+
+
 //TODO upgradeStateOrder
 
 export const removeOrderController = async (req: Request, res: Response) => {
@@ -57,3 +73,7 @@ export const removeOrderController = async (req: Request, res: Response) => {
 		});
 	}
 };
+
+function getOrderByID(id: string) {
+	throw new Error('Function not implemented.');
+}
