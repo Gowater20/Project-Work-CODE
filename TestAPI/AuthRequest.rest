@@ -30,4 +30,4 @@ GET http://localhost:3000/api/auth/logout
 ###
 // show user info
 GET http://localhost:3000/api/auth/user
-Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTI3ODY0MDUsImV4cCI6MTcxMjg3MjgwNX0.ukI4x7f982HmduembD5wUd0tNkKdWCFWiTtLHaNcE8s"
+Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTI4NzE4MDAsImV4cCI6MTcxMjk1ODIwMH0.oNOpnc4fqHv_ZFiQrQ4B97Ube3fjCbngH1P5JqBAcCc"
