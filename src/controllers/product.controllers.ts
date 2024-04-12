@@ -52,15 +52,17 @@ export const updateProductController = async (req: Request, res: Response) => {
 		res.status(200).json({ message: "Product successfully modified", product });
 	} catch (error) {
 		console.error("Error handling product update request:", error);
-		res.status(500).json({ message: "Bad request" });
+		res.status(400).json({ message: "Bad request" });
 	}
 };
 
 export const deletedProductController = async (req: Request, res: Response) => {
 	try {
 		const product = await deleteProduct(req.params.id);
-		res.status(200).json({ message: "Product deleted", product });
+		if (!product){
+			return res.status(200).json({ message: "Product deleted" });
+	}
 	} catch (errore) {
 		res.status(400).json("Bad request");
 	}
-};
+	}

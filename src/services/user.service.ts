@@ -8,7 +8,7 @@ export const registerUser = async (newUser: IUser): Promise<IUser> => {
         throw new Error("User already exists");
     }
     // Hash della password prima di salvarla nel database
-    const hashedPassword = await bcrypt.hash(newUser.password, 10);
+    const hashedPassword = await bcrypt.hash(newUser.password, "$2a$10$7h/0SQ4FXRG5eX3602o3/.6xGWZdP6oqHGWcCHS1A3oRFZ70gSB8a");
     const user = await User.create({ ...newUser, password: hashedPassword });
 
     return user;
@@ -25,3 +25,7 @@ export const matchUser = async (email: string, password: string): Promise<IUser 
     }
     return null;
 }; 
+
+export const findUserById = async (id: string) => {
+    return await User.findById(id);
+}
