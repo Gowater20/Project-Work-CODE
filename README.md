@@ -5,12 +5,12 @@
 realizzato da: [Fabio Vallacqua](https://github.com/Gowater20), [Valeria Imbrogio Ponaro](https://github.com/IPVale) e [Dylan La Ferrera](https://github.com/Yomir00)
 
 ## Tecnologie utilizzate
- `Javascript ` è stato utilizzato come linguaggio principale per lo sviluppo dell'e-commerce
- `Typescript ` offre una maggiore manutenibilità del codice poiché implementa la tipizzazione statica consentendo di catturare errori di tipo
- `Express.js ` è un framework web per Node.js che semplifica lo sviluppo di applicazioni web e API attraverso il suo sistema di routing
-               middleware e gestione degli errori
- `MongoDB ` è un database NoSQL flessibile e scalabile, orientato ai documenti, che offre una struttura dati dinamica e potenti capacità di
-            query
+ - `Javascript ` è stato utilizzato come linguaggio principale per lo sviluppo dell'e-commerce
+ - `Typescript ` offre una maggiore manutenibilità del codice poiché implementa la tipizzazione statica consentendo di catturare errori di tipo
+ - `Express.js ` è un framework web per Node.js che semplifica lo sviluppo di applicazioni web e API attraverso il suo sistema di routing
+    middleware e gestione degli errori
+ - `MongoDB ` è un database NoSQL flessibile e scalabile, orientato ai documenti, che offre una struttura dati dinamica e potenti capacità di
+    query
 
 La combinazione JavaScript, TypeScript, Express.js e MongoDB offre una soluzione completa;
 consente di avere un'applicazione performante, scalabile e facile da modificare
