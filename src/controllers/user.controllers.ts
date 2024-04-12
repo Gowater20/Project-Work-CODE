@@ -14,7 +14,7 @@ export const Signup = async (req: Request, res: Response) => {
         const userCreated: IUser = await registerUser(newUser);
         return res.status(200).json({ userCreated });
     } catch (err: any) {
-        return res.status(500).json({ error: err.message });
+        return res.status(400).json({ error: err.message });
     }
 };
 

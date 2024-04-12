@@ -17,8 +17,9 @@ export const getOrdersController = async (req: Request, res: Response) => {
 	}
 };
 
+//TODO
 // create new order from cart
-export const createOrderController = async (req: Request, res: Response) => {
+/* export const createOrderController = async (req: Request, res: Response) => {
 	//const { name, surname, address, city, region, state, postalCode} = req.body;
 
 	try {
@@ -40,7 +41,7 @@ export const createOrderController = async (req: Request, res: Response) => {
 		console.error("Server not response for create order", error);
 		res.status(500).json({ success: false, error: 'Errore durante la creazione dell\'ordine' });
 	}
-};
+}; */
 
 
 //TODO getOrderById
@@ -74,7 +75,3 @@ export const removeOrderController = async (req: Request, res: Response) => {
 		});
 	}
 };
-
-function getOrderByID(id: string) {
-	throw new Error('Function not implemented.');
-}

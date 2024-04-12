@@ -60,7 +60,7 @@ export const deletedProductController = async (req: Request, res: Response) => {
 	try {
 		const product = await deleteProduct(req.params.id);
 		if (!product){
-			return res.status(200).json({ message: "Product deleted", product });
+			return res.status(200).json({ message: "Product deleted" });
 	}
 	} catch (errore) {
 		res.status(400).json("Bad request");
