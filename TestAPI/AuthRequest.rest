@@ -8,9 +8,9 @@ POST http://localhost:3000/api/auth/register
 Content-Type: application/json
 
 {
-    "name": "provaUser5343",
-    "surname": "cognomeUser",
-    "email": "provaUser5343@gmail.com",
+    "name": "provaUser5343245435",
+    "surname": "cognomeUser4",
+    "email": "provaUser5344353@gmail.com",
     "password": "test123"
 }
 
