@@ -25,3 +25,7 @@ export const matchUser = async (email: string, password: string): Promise<IUser 
     }
     return null;
 }; 
+
+export const findUserById = async (id: string) => {
+    return await User.findById(id);
+}
