@@ -50,11 +50,11 @@ Consente di aggiungere, rimuove, svuotare il carrello
 
 # Funzionalità mancanti all'ultima modifica
 - Gestione utenti
-    - [ ] Registrazione utenti/admin
-    - [ ] Logout utenti/admin
+    - [ ] Registrazione admin
     - [ ] Gestione utente loggato
+- Gestione carrello
+    - [ ] Recuperare id utente dal JWT token in tutte le rotte
 - Gestioni ordini
     - [ ] Creazione dell'ordine
     - [ ] Recupero di un ordine tramite id
     - [ ] Aggiornamento dello stato dell'ordine
-    - [ ] Cancellazione di un ordine
